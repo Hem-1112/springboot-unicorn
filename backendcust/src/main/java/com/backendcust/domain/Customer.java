@@ -1,23 +1,21 @@
-package com.backendcust;
+package com.backendcust.domain;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="CUSTOMERS")
 public class Customer {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     long id;
+
+    @Column(name="CUSTOMER_NAME")
     String name;
     String password;
     String email;
 
-    public Customer(long id, String name, String password, String email) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-    }
     public Customer() {
-    }
-
-    public String toJSON(){
-        return "{\"id\":" + id + ", \"name\":\"" + name + "\", \"password\":\"" + password + "\", \"email\":\"" + email + "\" }";
     }
 
     public long getId() {
