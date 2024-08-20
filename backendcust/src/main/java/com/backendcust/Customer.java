@@ -13,6 +13,8 @@ public class Customer {
         this.password = password;
         this.email = email;
     }
+    public Customer() {
+    }
 
     public String toJSON(){
         return "{\"id\":" + id + ", \"name\":\"" + name + "\", \"password\":\"" + password + "\", \"email\":\"" + email + "\" }";
