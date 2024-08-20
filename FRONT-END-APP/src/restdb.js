@@ -1,5 +1,5 @@
 // src/restdb.js
-const baseURL = 'http://localhost:4000/customers';
+const baseURL = 'http://localhost:8080/api/customers';
 
 export async function getAll(setCustomers) {
   const myInit = {
