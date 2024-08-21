@@ -5,18 +5,24 @@ import CustomerList from './CustomerList';
 import CustomerAddUpdateForm from './CustomerAddUpdateForm';
 
 const log = (message) => console.log(message);
-
 const App = () => {
   const [customers, setCustomers] = useState([]);
   const [formObject, setFormObject] = useState({ id: -1, name: '', email: '', password: '' });
   const [selectedCustomerId, setSelectedCustomerId] = useState(null);
+  const [refresh, setRefresh] = useState(false);
+  // const [triggerRefresh, setTriggerRefresh] = useState(false);
+
+  useEffect(() => {
+    if (refresh) {
+      window.location.reload();
+    }
+  }, [refresh]);
 
   useEffect(() => {
     const loadCustomers = async () => {
       const customersData = await fetchCustomers();
       setCustomers(customersData);
     };
-
     loadCustomers();
   }, []);
 
@@ -41,6 +47,8 @@ const App = () => {
     log("in handleCancelClick()");
     setFormObject({ id: -1, name: '', email: '', password: '' });
     setSelectedCustomerId(null);
+    setRefresh(true);
+    // setTriggerRefresh(prevState => !prevState);
   };
 
   const handleDeleteClick = async () => {
@@ -51,6 +59,8 @@ const App = () => {
       setFormObject({ id: -1, name: '', email: '', password: '' });
       setSelectedCustomerId(null);
     }
+    setRefresh(true);
+    // setTriggerRefresh(prevState => !prevState);
   };
 
   const handleSaveClick = async () => {
@@ -70,6 +80,8 @@ const App = () => {
     }
     setFormObject({ id: -1, name: '', email: '', password: '' });
     setSelectedCustomerId(null);
+    setRefresh(true);
+    // setTriggerRefresh(prevState => !prevState);
   };
 
   return (
@@ -78,6 +90,7 @@ const App = () => {
         customers={customers}
         selectedCustomerId={selectedCustomerId}
         handleListClick={handleListClick}
+        // refresh={triggerRefresh}
       />
       <CustomerAddUpdateForm
         formObject={formObject}
@@ -85,6 +98,7 @@ const App = () => {
         handleDeleteClick={handleDeleteClick}
         handleSaveClick={handleSaveClick}
         handleCancelClick={handleCancelClick}
+        // refresh={triggerRefresh}
       />
     </div>
   );

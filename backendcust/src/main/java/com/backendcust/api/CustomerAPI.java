@@ -21,7 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
     @Autowired
     CustomersRepository repo;
-    @CrossOrigin(origins = "http://localhost:3000")
 
     @GetMapping
     public Iterable<Customer> getAll() {
@@ -70,6 +69,5 @@ import org.springframework.web.util.UriComponentsBuilder;
             updatedCustomer.setId(customerId);
             repo.save(updatedCustomer);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
-
     }
 }
