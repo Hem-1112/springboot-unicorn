@@ -1,10 +1,19 @@
 // src/restdb.js
 const baseURL = 'http://localhost:8080/api/customers';
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('token');
+  return {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  };
+};
+
 export async function getAll(setCustomers) {
   const myInit = {
     method: 'GET',
-    mode: 'cors'
+    mode: 'cors',
+    headers: getAuthHeaders()
   };
   const fetchData = async (url) => {
     try {

@@ -17,8 +17,10 @@ const App = () => {
     getAll(setCustomers);
   };
 
+  
   useEffect(() => {
     if (isAuthenticated) {
+      checkTokenExpiration();
       getCustomers();
     }
   }, [isAuthenticated]);
@@ -36,6 +38,17 @@ const App = () => {
     setIsAuthenticated(false);
   };
 
+  const checkTokenExpiration = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      if (decodedToken.exp * 1000 < Date.now()) {
+        handleLogout();
+      }
+    }
+  };
+  
+  
   return (
   
       <Container>
