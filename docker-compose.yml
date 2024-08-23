@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+  authservice:
+    image: authservice:latest
+    build:
+      context: ./authservice
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+
   backend:
     image: backendcust:latest
     build:
@@ -20,6 +29,7 @@ services:
       - app-network
     depends_on:
       - backend
+      - authservice
 
 networks:
   app-network:
