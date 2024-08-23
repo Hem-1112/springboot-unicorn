@@ -1,0 +1,14 @@
+node_modules/
+**/node_modules/
+
+# Build directories
+dist/
+build/
+
+.vscode/
+
+# Package lock
+package-lock.json
+yarn.lock
+
+coverage/
